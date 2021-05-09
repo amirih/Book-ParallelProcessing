@@ -1,0 +1,84 @@
+spliter
+Time: Tue May 29 17:55:38 +0430 2018
+icc
+-D _GNU_SOURCE -O3 -xHOST
+-no-vec
+ADD2MatrixColumnbyColumn, 128x128, 18256
+ADD2MatrixColumnbyColumn, 128x128, 5864
+spliter
+Time: Tue May 29 17:55:53 +0430 2018
+gcc
+-D _GNU_SOURCE -O3 -march=native
+-fno-tree-vectorize -fno-tree-slp-vectorize
+ADD2MatrixColumnbyColumn, 128x128, 19256
+ADD2MatrixColumnbyColumn, 128x128, 6144
+spliter
+Time: Tue May 29 17:56:09 +0430 2018
+clang
+-D _GNU_SOURCE -O3 -march=native
+-fno-vectorize -fno-slp-vectorize
+ADD2MatrixColumnbyColumn, 128x128, 95820
+ADD2MatrixColumnbyColumn, 128x128, 106834
+spliter
+Time: Tue May 29 17:56:26 +0430 2018
+icc
+-D _GNU_SOURCE -O3 -xHOST
+-no-vec
+ADD2MatrixColumnbyColumn, 256x256, 74928
+ADD2MatrixColumnbyColumn, 256x256, 34904
+spliter
+Time: Tue May 29 17:56:41 +0430 2018
+gcc
+-D _GNU_SOURCE -O3 -march=native
+-fno-tree-vectorize -fno-tree-slp-vectorize
+ADD2MatrixColumnbyColumn, 256x256, 77644
+ADD2MatrixColumnbyColumn, 256x256, 36518
+spliter
+Time: Tue May 29 17:56:57 +0430 2018
+clang
+-D _GNU_SOURCE -O3 -march=native
+-fno-vectorize -fno-slp-vectorize
+ADD2MatrixColumnbyColumn, 256x256, 648900
+ADD2MatrixColumnbyColumn, 256x256, 640084
+spliter
+Time: Tue May 29 17:57:13 +0430 2018
+icc
+-D _GNU_SOURCE -O3 -xHOST
+-no-vec
+ADD2MatrixColumnbyColumn, 512x512, 300656
+ADD2MatrixColumnbyColumn, 512x512, 150400
+spliter
+Time: Tue May 29 17:57:29 +0430 2018
+gcc
+-D _GNU_SOURCE -O3 -march=native
+-fno-tree-vectorize -fno-tree-slp-vectorize
+ADD2MatrixColumnbyColumn, 512x512, 309084
+ADD2MatrixColumnbyColumn, 512x512, 146372
+spliter
+Time: Tue May 29 17:57:45 +0430 2018
+clang
+-D _GNU_SOURCE -O3 -march=native
+-fno-vectorize -fno-slp-vectorize
+ADD2MatrixColumnbyColumn, 512x512, 3853184
+ADD2MatrixColumnbyColumn, 512x512, 3671538
+spliter
+Time: Tue May 29 17:58:01 +0430 2018
+icc
+-D _GNU_SOURCE -O3 -xHOST
+-no-vec
+ADD2MatrixColumnbyColumn, 1024x1024, 1513744
+ADD2MatrixColumnbyColumn, 1024x1024, 982078
+spliter
+Time: Tue May 29 17:58:17 +0430 2018
+gcc
+-D _GNU_SOURCE -O3 -march=native
+-fno-tree-vectorize -fno-tree-slp-vectorize
+ADD2MatrixColumnbyColumn, 1024x1024, 1562070
+ADD2MatrixColumnbyColumn, 1024x1024, 1156538
+spliter
+Time: Tue May 29 17:58:33 +0430 2018
+clang
+-D _GNU_SOURCE -O3 -march=native
+-fno-vectorize -fno-slp-vectorize
+ADD2MatrixColumnbyColumn, 1024x1024, 41954896
+ADD2MatrixColumnbyColumn, 1024x1024, 43037478

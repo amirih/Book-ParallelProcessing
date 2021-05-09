@@ -1,0 +1,1074 @@
+	.text
+	.file	"ADD-col.c"
+	.globl	assignToThisCore12      # -- Begin function assignToThisCore12
+	.p2align	4, 0x90
+	.type	assignToThisCore12,@function
+assignToThisCore12:                     # @assignToThisCore12
+	.cfi_startproc
+# %bb.0:
+	vxorps	%xmm0, %xmm0, %xmm0
+	vmovups	%ymm0, mask+96(%rip)
+	vmovups	%ymm0, mask+64(%rip)
+	vmovups	%ymm0, mask+32(%rip)
+	vmovups	%ymm0, mask(%rip)
+	cmpl	$1023, %edi             # imm = 0x3FF
+	jbe	.LBB0_1
+# %bb.2:
+	cmpl	$1023, %esi             # imm = 0x3FF
+	jbe	.LBB0_3
+.LBB0_4:
+	xorl	%edi, %edi
+	movl	$128, %esi
+	movl	$mask, %edx
+	vzeroupper
+	jmp	sched_setaffinity       # TAILCALL
+.LBB0_1:
+	movslq	%edi, %rax
+	movl	$1, %ecx
+	shlxq	%rax, %rcx, %rcx
+	shrq	$6, %rax
+	orq	%rcx, mask(,%rax,8)
+	cmpl	$1023, %esi             # imm = 0x3FF
+	ja	.LBB0_4
+.LBB0_3:
+	movslq	%esi, %rax
+	movl	$1, %ecx
+	shlxq	%rax, %rcx, %rcx
+	shrq	$6, %rax
+	orq	%rcx, mask(,%rax,8)
+	xorl	%edi, %edi
+	movl	$128, %esi
+	movl	$mask, %edx
+	vzeroupper
+	jmp	sched_setaffinity       # TAILCALL
+.Lfunc_end0:
+	.size	assignToThisCore12, .Lfunc_end0-assignToThisCore12
+	.cfi_endproc
+                                        # -- End function
+	.section	.rodata.cst8,"aM",@progbits,8
+	.p2align	3               # -- Begin function assignMatrixf32
+.LCPI1_0:
+	.quad	4593527504729830064     # double 0.123
+	.text
+	.globl	assignMatrixf32
+	.p2align	4, 0x90
+	.type	assignMatrixf32,@function
+assignMatrixf32:                        # @assignMatrixf32
+	.cfi_startproc
+# %bb.0:
+	addq	$4, %rdi
+	xorl	%r8d, %r8d
+	vmovsd	.LCPI1_0(%rip), %xmm0   # xmm0 = mem[0],zero
+	.p2align	4, 0x90
+.LBB1_1:                                # =>This Loop Header: Depth=1
+                                        #     Child Loop BB1_2 Depth 2
+	movq	$-128, %rsi
+	xorl	%ecx, %ecx
+	.p2align	4, 0x90
+.LBB1_2:                                #   Parent Loop BB1_1 Depth=1
+                                        # =>  This Inner Loop Header: Depth=2
+	leal	129(%rsi), %r9d
+	xorl	%edx, %edx
+	movl	%r8d, %eax
+	divl	%r9d
+                                        # kill: def %eax killed %eax def %rax
+	movl	%ecx, %edx
+	imull	%r8d, %edx
+	addl	%edx, %eax
+	imulq	$274877907, %rax, %rdx  # imm = 0x10624DD3
+	shrq	$38, %rdx
+	imull	$1000, %edx, %edx       # imm = 0x3E8
+	subl	%edx, %eax
+	vcvtsi2sdl	%eax, %xmm2, %xmm1
+	vaddsd	%xmm0, %xmm1, %xmm1
+	vcvtsd2ss	%xmm1, %xmm1, %xmm1
+	vmovss	%xmm1, 508(%rdi,%rsi,4)
+	leal	130(%rsi), %r9d
+	xorl	%edx, %edx
+	movl	%r8d, %eax
+	divl	%r9d
+                                        # kill: def %eax killed %eax def %rax
+	movl	%ecx, %edx
+	orl	$1, %edx
+	imull	%r8d, %edx
+	addq	$2, %rcx
+	addl	%edx, %eax
+	imulq	$274877907, %rax, %rdx  # imm = 0x10624DD3
+	shrq	$38, %rdx
+	imull	$1000, %edx, %edx       # imm = 0x3E8
+	subl	%edx, %eax
+	vcvtsi2sdl	%eax, %xmm2, %xmm1
+	vaddsd	%xmm0, %xmm1, %xmm1
+	vcvtsd2ss	%xmm1, %xmm1, %xmm1
+	vmovss	%xmm1, 512(%rdi,%rsi,4)
+	addq	$2, %rsi
+	jne	.LBB1_2
+# %bb.3:                                #   in Loop: Header=BB1_1 Depth=1
+	addq	$1, %r8
+	addq	$512, %rdi              # imm = 0x200
+	cmpq	$128, %r8
+	jne	.LBB1_1
+# %bb.4:
+	retq
+.Lfunc_end1:
+	.size	assignMatrixf32, .Lfunc_end1-assignMatrixf32
+	.cfi_endproc
+                                        # -- End function
+	.globl	assignMatrixi32         # -- Begin function assignMatrixi32
+	.p2align	4, 0x90
+	.type	assignMatrixi32,@function
+assignMatrixi32:                        # @assignMatrixi32
+	.cfi_startproc
+# %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	pushq	%r15
+	.cfi_def_cfa_offset 24
+	pushq	%r14
+	.cfi_def_cfa_offset 32
+	pushq	%r13
+	.cfi_def_cfa_offset 40
+	pushq	%r12
+	.cfi_def_cfa_offset 48
+	pushq	%rbx
+	.cfi_def_cfa_offset 56
+	.cfi_offset %rbx, -56
+	.cfi_offset %r12, -48
+	.cfi_offset %r13, -40
+	.cfi_offset %r14, -32
+	.cfi_offset %r15, -24
+	.cfi_offset %rbp, -16
+	addq	$12, %rdi
+	xorl	%r8d, %r8d
+	xorl	%r11d, %r11d
+	xorl	%r9d, %r9d
+	xorl	%r10d, %r10d
+	.p2align	4, 0x90
+.LBB2_1:                                # =>This Loop Header: Depth=1
+                                        #     Child Loop BB2_2 Depth 2
+	movq	$-128, %rax
+	xorl	%r13d, %r13d
+	movl	%r10d, %ebp
+	movl	%r8d, %ecx
+	movl	%r9d, %ebx
+	.p2align	4, 0x90
+.LBB2_2:                                #   Parent Loop BB2_1 Depth=1
+                                        # =>  This Inner Loop Header: Depth=2
+	movl	%ebx, %edx
+	imulq	$274877907, %rdx, %rdx  # imm = 0x10624DD3
+	shrq	$38, %rdx
+	imull	$1000, %edx, %edx       # imm = 0x3E8
+	movl	%ebx, %r14d
+	subl	%edx, %r14d
+	movl	%ecx, %edx
+	imulq	$274877907, %rdx, %rdx  # imm = 0x10624DD3
+	shrq	$38, %rdx
+	imull	$1000, %edx, %r15d      # imm = 0x3E8
+	movl	%ecx, %r12d
+	subl	%r15d, %r12d
+	movl	%ebp, %edx
+	imulq	$274877907, %rdx, %rdx  # imm = 0x10624DD3
+	shrq	$38, %rdx
+	imull	$1000, %edx, %edx       # imm = 0x3E8
+	movl	%ebp, %esi
+	subl	%edx, %esi
+	movl	%r13d, %edx
+	imulq	$274877907, %rdx, %rdx  # imm = 0x10624DD3
+	shrq	$38, %rdx
+	imull	$1000, %edx, %r15d      # imm = 0x3E8
+	movl	%r13d, %edx
+	subl	%r15d, %edx
+	movl	%edx, 500(%rdi,%rax,4)
+	movl	%esi, 504(%rdi,%rax,4)
+	movl	%r12d, 508(%rdi,%rax,4)
+	movl	%r14d, 512(%rdi,%rax,4)
+	addl	%r11d, %ebx
+	addl	%r11d, %ecx
+	addl	%r11d, %ebp
+	addl	%r11d, %r13d
+	addq	$4, %rax
+	jne	.LBB2_2
+# %bb.3:                                #   in Loop: Header=BB2_1 Depth=1
+	addq	$1, %r10
+	addl	$3, %r9d
+	addl	$4, %r11d
+	addq	$512, %rdi              # imm = 0x200
+	addl	$2, %r8d
+	cmpq	$128, %r10
+	jne	.LBB2_1
+# %bb.4:
+	popq	%rbx
+	popq	%r12
+	popq	%r13
+	popq	%r14
+	popq	%r15
+	popq	%rbp
+	retq
+.Lfunc_end2:
+	.size	assignMatrixi32, .Lfunc_end2-assignMatrixi32
+	.cfi_endproc
+                                        # -- End function
+	.globl	assignMatrixi16         # -- Begin function assignMatrixi16
+	.p2align	4, 0x90
+	.type	assignMatrixi16,@function
+assignMatrixi16:                        # @assignMatrixi16
+	.cfi_startproc
+# %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	pushq	%r15
+	.cfi_def_cfa_offset 24
+	pushq	%r14
+	.cfi_def_cfa_offset 32
+	pushq	%r12
+	.cfi_def_cfa_offset 40
+	pushq	%rbx
+	.cfi_def_cfa_offset 48
+	.cfi_offset %rbx, -48
+	.cfi_offset %r12, -40
+	.cfi_offset %r14, -32
+	.cfi_offset %r15, -24
+	.cfi_offset %rbp, -16
+	movq	%rdi, %r14
+	xorl	%r15d, %r15d
+	.p2align	4, 0x90
+.LBB3_1:                                # =>This Loop Header: Depth=1
+                                        #     Child Loop BB3_2 Depth 2
+	movq	$-128, %rbx
+	xorl	%ebp, %ebp
+	.p2align	4, 0x90
+.LBB3_2:                                #   Parent Loop BB3_1 Depth=1
+                                        # =>  This Inner Loop Header: Depth=2
+	movzbl	%bpl, %r12d
+	callq	rand
+	cltq
+	imulq	$1717986919, %rax, %rcx # imm = 0x66666667
+	movq	%rcx, %rdx
+	shrq	$63, %rdx
+	sarq	$34, %rcx
+	addl	%edx, %ecx
+	addl	%ecx, %ecx
+	leal	(%rcx,%rcx,4), %ecx
+	subl	%ecx, %eax
+	addl	%r12d, %eax
+	movw	%ax, 256(%r14,%rbx,2)
+	addl	%r15d, %ebp
+	addq	$1, %rbx
+	jne	.LBB3_2
+# %bb.3:                                #   in Loop: Header=BB3_1 Depth=1
+	addq	$1, %r15
+	addq	$256, %r14              # imm = 0x100
+	cmpq	$128, %r15
+	jne	.LBB3_1
+# %bb.4:
+	popq	%rbx
+	popq	%r12
+	popq	%r14
+	popq	%r15
+	popq	%rbp
+	retq
+.Lfunc_end3:
+	.size	assignMatrixi16, .Lfunc_end3-assignMatrixi16
+	.cfi_endproc
+                                        # -- End function
+	.section	.rodata.cst32,"aM",@progbits,32
+	.p2align	5               # -- Begin function assignMatrixui16
+.LCPI4_0:
+	.byte	0                       # 0x0
+	.byte	1                       # 0x1
+	.byte	4                       # 0x4
+	.byte	5                       # 0x5
+	.byte	8                       # 0x8
+	.byte	9                       # 0x9
+	.byte	12                      # 0xc
+	.byte	13                      # 0xd
+	.byte	8                       # 0x8
+	.byte	9                       # 0x9
+	.byte	12                      # 0xc
+	.byte	13                      # 0xd
+	.byte	12                      # 0xc
+	.byte	13                      # 0xd
+	.byte	14                      # 0xe
+	.byte	15                      # 0xf
+	.byte	16                      # 0x10
+	.byte	17                      # 0x11
+	.byte	20                      # 0x14
+	.byte	21                      # 0x15
+	.byte	24                      # 0x18
+	.byte	25                      # 0x19
+	.byte	28                      # 0x1c
+	.byte	29                      # 0x1d
+	.byte	24                      # 0x18
+	.byte	25                      # 0x19
+	.byte	28                      # 0x1c
+	.byte	29                      # 0x1d
+	.byte	28                      # 0x1c
+	.byte	29                      # 0x1d
+	.byte	30                      # 0x1e
+	.byte	31                      # 0x1f
+.LCPI4_1:
+	.short	10                      # 0xa
+	.short	11                      # 0xb
+	.short	12                      # 0xc
+	.short	13                      # 0xd
+	.short	14                      # 0xe
+	.short	15                      # 0xf
+	.short	16                      # 0x10
+	.short	17                      # 0x11
+	.short	18                      # 0x12
+	.short	19                      # 0x13
+	.short	20                      # 0x14
+	.short	21                      # 0x15
+	.short	22                      # 0x16
+	.short	23                      # 0x17
+	.short	24                      # 0x18
+	.short	25                      # 0x19
+.LCPI4_2:
+	.short	26                      # 0x1a
+	.short	27                      # 0x1b
+	.short	28                      # 0x1c
+	.short	29                      # 0x1d
+	.short	30                      # 0x1e
+	.short	31                      # 0x1f
+	.short	32                      # 0x20
+	.short	33                      # 0x21
+	.short	34                      # 0x22
+	.short	35                      # 0x23
+	.short	36                      # 0x24
+	.short	37                      # 0x25
+	.short	38                      # 0x26
+	.short	39                      # 0x27
+	.short	40                      # 0x28
+	.short	41                      # 0x29
+.LCPI4_3:
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+	.byte	255                     # 0xff
+	.byte	0                       # 0x0
+.LCPI4_4:
+	.short	42                      # 0x2a
+	.short	43                      # 0x2b
+	.short	44                      # 0x2c
+	.short	45                      # 0x2d
+	.short	46                      # 0x2e
+	.short	47                      # 0x2f
+	.short	48                      # 0x30
+	.short	49                      # 0x31
+	.short	50                      # 0x32
+	.short	51                      # 0x33
+	.short	52                      # 0x34
+	.short	53                      # 0x35
+	.short	54                      # 0x36
+	.short	55                      # 0x37
+	.short	56                      # 0x38
+	.short	57                      # 0x39
+.LCPI4_5:
+	.short	58                      # 0x3a
+	.short	59                      # 0x3b
+	.short	60                      # 0x3c
+	.short	61                      # 0x3d
+	.short	62                      # 0x3e
+	.short	63                      # 0x3f
+	.short	64                      # 0x40
+	.short	65                      # 0x41
+	.short	66                      # 0x42
+	.short	67                      # 0x43
+	.short	68                      # 0x44
+	.short	69                      # 0x45
+	.short	70                      # 0x46
+	.short	71                      # 0x47
+	.short	72                      # 0x48
+	.short	73                      # 0x49
+.LCPI4_6:
+	.short	74                      # 0x4a
+	.short	75                      # 0x4b
+	.short	76                      # 0x4c
+	.short	77                      # 0x4d
+	.short	78                      # 0x4e
+	.short	79                      # 0x4f
+	.short	80                      # 0x50
+	.short	81                      # 0x51
+	.short	82                      # 0x52
+	.short	83                      # 0x53
+	.short	84                      # 0x54
+	.short	85                      # 0x55
+	.short	86                      # 0x56
+	.short	87                      # 0x57
+	.short	88                      # 0x58
+	.short	89                      # 0x59
+.LCPI4_7:
+	.short	90                      # 0x5a
+	.short	91                      # 0x5b
+	.short	92                      # 0x5c
+	.short	93                      # 0x5d
+	.short	94                      # 0x5e
+	.short	95                      # 0x5f
+	.short	96                      # 0x60
+	.short	97                      # 0x61
+	.short	98                      # 0x62
+	.short	99                      # 0x63
+	.short	100                     # 0x64
+	.short	101                     # 0x65
+	.short	102                     # 0x66
+	.short	103                     # 0x67
+	.short	104                     # 0x68
+	.short	105                     # 0x69
+.LCPI4_8:
+	.short	106                     # 0x6a
+	.short	107                     # 0x6b
+	.short	108                     # 0x6c
+	.short	109                     # 0x6d
+	.short	110                     # 0x6e
+	.short	111                     # 0x6f
+	.short	112                     # 0x70
+	.short	113                     # 0x71
+	.short	114                     # 0x72
+	.short	115                     # 0x73
+	.short	116                     # 0x74
+	.short	117                     # 0x75
+	.short	118                     # 0x76
+	.short	119                     # 0x77
+	.short	120                     # 0x78
+	.short	121                     # 0x79
+.LCPI4_9:
+	.short	122                     # 0x7a
+	.short	123                     # 0x7b
+	.short	124                     # 0x7c
+	.short	125                     # 0x7d
+	.short	126                     # 0x7e
+	.short	127                     # 0x7f
+	.short	128                     # 0x80
+	.short	129                     # 0x81
+	.short	130                     # 0x82
+	.short	131                     # 0x83
+	.short	132                     # 0x84
+	.short	133                     # 0x85
+	.short	134                     # 0x86
+	.short	135                     # 0x87
+	.short	136                     # 0x88
+	.short	137                     # 0x89
+	.text
+	.globl	assignMatrixui16
+	.p2align	4, 0x90
+	.type	assignMatrixui16,@function
+assignMatrixui16:                       # @assignMatrixui16
+	.cfi_startproc
+# %bb.0:
+	movq	$-32768, %rax           # imm = 0x8000
+	xorl	%ecx, %ecx
+	vmovdqa	.LCPI4_0(%rip), %ymm10  # ymm10 = [0,1,4,5,8,9,12,13,8,9,12,13,12,13,14,15,16,17,20,21,24,25,28,29,24,25,28,29,28,29,30,31]
+	vmovdqa	.LCPI4_1(%rip), %ymm1   # ymm1 = [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+	vmovdqa	.LCPI4_2(%rip), %ymm2   # ymm2 = [26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41]
+	vmovdqa	.LCPI4_3(%rip), %ymm3   # ymm3 = [255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0,255,0]
+	vmovdqa	.LCPI4_4(%rip), %ymm4   # ymm4 = [42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57]
+	vmovdqa	.LCPI4_5(%rip), %ymm5   # ymm5 = [58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73]
+	vmovdqa	.LCPI4_6(%rip), %ymm6   # ymm6 = [74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89]
+	vmovdqa	.LCPI4_7(%rip), %ymm7   # ymm7 = [90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105]
+	vmovdqa	.LCPI4_8(%rip), %ymm8   # ymm8 = [106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121]
+	vmovdqa	.LCPI4_9(%rip), %ymm9   # ymm9 = [122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137]
+	.p2align	4, 0x90
+.LBB4_1:                                # =>This Inner Loop Header: Depth=1
+	vmovd	%ecx, %xmm0
+	vpbroadcastd	%xmm0, %ymm0
+	vpshufb	%ymm10, %ymm0, %ymm0
+	vpermq	$232, %ymm0, %ymm0      # ymm0 = ymm0[0,2,2,3]
+	vinserti128	$1, %xmm0, %ymm0, %ymm0
+	vpaddw	%ymm1, %ymm0, %ymm11
+	vpaddw	%ymm2, %ymm0, %ymm12
+	vpand	%ymm3, %ymm11, %ymm11
+	vpand	%ymm3, %ymm12, %ymm12
+	vmovdqu	%ymm11, 32768(%rdi,%rax)
+	vmovdqu	%ymm12, 32800(%rdi,%rax)
+	vpaddw	%ymm4, %ymm0, %ymm11
+	vpaddw	%ymm5, %ymm0, %ymm12
+	vpand	%ymm3, %ymm11, %ymm11
+	vpand	%ymm3, %ymm12, %ymm12
+	vmovdqu	%ymm11, 32832(%rdi,%rax)
+	vmovdqu	%ymm12, 32864(%rdi,%rax)
+	vpaddw	%ymm6, %ymm0, %ymm11
+	vpaddw	%ymm7, %ymm0, %ymm12
+	vpand	%ymm3, %ymm11, %ymm11
+	vpand	%ymm3, %ymm12, %ymm12
+	vmovdqu	%ymm11, 32896(%rdi,%rax)
+	vmovdqu	%ymm12, 32928(%rdi,%rax)
+	vpaddw	%ymm8, %ymm0, %ymm11
+	vpaddw	%ymm9, %ymm0, %ymm0
+	vpand	%ymm3, %ymm11, %ymm11
+	vpand	%ymm3, %ymm0, %ymm0
+	vmovdqu	%ymm11, 32960(%rdi,%rax)
+	vmovdqu	%ymm0, 32992(%rdi,%rax)
+	addl	$1, %ecx
+	addq	$256, %rax              # imm = 0x100
+	jne	.LBB4_1
+# %bb.2:
+	vzeroupper
+	retq
+.Lfunc_end4:
+	.size	assignMatrixui16, .Lfunc_end4-assignMatrixui16
+	.cfi_endproc
+                                        # -- End function
+	.globl	assignMatrixi8          # -- Begin function assignMatrixi8
+	.p2align	4, 0x90
+	.type	assignMatrixi8,@function
+assignMatrixi8:                         # @assignMatrixi8
+	.cfi_startproc
+# %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	pushq	%r15
+	.cfi_def_cfa_offset 24
+	pushq	%r14
+	.cfi_def_cfa_offset 32
+	pushq	%rbx
+	.cfi_def_cfa_offset 40
+	pushq	%rax
+	.cfi_def_cfa_offset 48
+	.cfi_offset %rbx, -40
+	.cfi_offset %r14, -32
+	.cfi_offset %r15, -24
+	.cfi_offset %rbp, -16
+	movq	%rdi, %r14
+	xorl	%r15d, %r15d
+	.p2align	4, 0x90
+.LBB5_1:                                # =>This Loop Header: Depth=1
+                                        #     Child Loop BB5_2 Depth 2
+	movq	$-128, %rbx
+	xorl	%ebp, %ebp
+	.p2align	4, 0x90
+.LBB5_2:                                #   Parent Loop BB5_1 Depth=1
+                                        # =>  This Inner Loop Header: Depth=2
+	callq	rand
+	movl	%eax, %ecx
+	shrl	$31, %ecx
+	addl	%eax, %ecx
+	andl	$254, %ecx
+	subl	%ecx, %eax
+	addl	%ebp, %eax
+	movb	%al, 128(%r14,%rbx)
+	addl	%r15d, %ebp
+	addq	$1, %rbx
+	jne	.LBB5_2
+# %bb.3:                                #   in Loop: Header=BB5_1 Depth=1
+	addq	$1, %r15
+	subq	$-128, %r14
+	cmpq	$128, %r15
+	jne	.LBB5_1
+# %bb.4:
+	addq	$8, %rsp
+	popq	%rbx
+	popq	%r14
+	popq	%r15
+	popq	%rbp
+	retq
+.Lfunc_end5:
+	.size	assignMatrixi8, .Lfunc_end5-assignMatrixi8
+	.cfi_endproc
+                                        # -- End function
+	.section	.rodata.cst32,"aM",@progbits,32
+	.p2align	5               # -- Begin function assignArrayi32
+.LCPI6_0:
+	.long	0                       # 0x0
+	.long	1                       # 0x1
+	.long	2                       # 0x2
+	.long	3                       # 0x3
+	.long	4                       # 0x4
+	.long	5                       # 0x5
+	.long	6                       # 0x6
+	.long	7                       # 0x7
+.LCPI6_1:
+	.long	1234                    # 0x4d2
+	.long	1235                    # 0x4d3
+	.long	1236                    # 0x4d4
+	.long	1237                    # 0x4d5
+	.long	1238                    # 0x4d6
+	.long	1239                    # 0x4d7
+	.long	1240                    # 0x4d8
+	.long	1241                    # 0x4d9
+	.section	.rodata.cst4,"aM",@progbits,4
+	.p2align	2
+.LCPI6_2:
+	.long	274877907               # 0x10624dd3
+.LCPI6_3:
+	.long	1000                    # 0x3e8
+.LCPI6_4:
+	.long	8                       # 0x8
+.LCPI6_5:
+	.long	16                      # 0x10
+.LCPI6_6:
+	.long	24                      # 0x18
+.LCPI6_7:
+	.long	32                      # 0x20
+	.text
+	.globl	assignArrayi32
+	.p2align	4, 0x90
+	.type	assignArrayi32,@function
+assignArrayi32:                         # @assignArrayi32
+	.cfi_startproc
+# %bb.0:
+	vmovdqa	.LCPI6_0(%rip), %ymm0   # ymm0 = [0,1,2,3,4,5,6,7]
+	vmovdqa	.LCPI6_1(%rip), %ymm1   # ymm1 = [1234,1235,1236,1237,1238,1239,1240,1241]
+	movq	$-16384, %rax           # imm = 0xC000
+	vpbroadcastd	.LCPI6_2(%rip), %ymm2 # ymm2 = [274877907,274877907,274877907,274877907,274877907,274877907,274877907,274877907]
+	vpshufd	$245, %ymm2, %ymm3      # ymm3 = ymm2[1,1,3,3,5,5,7,7]
+	vpbroadcastd	.LCPI6_3(%rip), %ymm4 # ymm4 = [1000,1000,1000,1000,1000,1000,1000,1000]
+	vpbroadcastd	.LCPI6_4(%rip), %ymm5 # ymm5 = [8,8,8,8,8,8,8,8]
+	vpbroadcastd	.LCPI6_5(%rip), %ymm6 # ymm6 = [16,16,16,16,16,16,16,16]
+	vpbroadcastd	.LCPI6_6(%rip), %ymm7 # ymm7 = [24,24,24,24,24,24,24,24]
+	vpbroadcastd	.LCPI6_7(%rip), %ymm8 # ymm8 = [32,32,32,32,32,32,32,32]
+	.p2align	4, 0x90
+.LBB6_1:                                # =>This Inner Loop Header: Depth=1
+	vpmulld	%ymm0, %ymm1, %ymm9
+	vpshufd	$245, %ymm9, %ymm10     # ymm10 = ymm9[1,1,3,3,5,5,7,7]
+	vpmuludq	%ymm3, %ymm10, %ymm10
+	vpmuludq	%ymm2, %ymm9, %ymm11
+	vpshufd	$245, %ymm11, %ymm11    # ymm11 = ymm11[1,1,3,3,5,5,7,7]
+	vpblendd	$170, %ymm10, %ymm11, %ymm10 # ymm10 = ymm11[0],ymm10[1],ymm11[2],ymm10[3],ymm11[4],ymm10[5],ymm11[6],ymm10[7]
+	vpsrld	$6, %ymm10, %ymm10
+	vpmulld	%ymm4, %ymm10, %ymm10
+	vpsubd	%ymm10, %ymm9, %ymm9
+	vmovdqu	%ymm9, 65536(%rdi,%rax,4)
+	vpaddd	%ymm5, %ymm1, %ymm9
+	vpaddd	%ymm5, %ymm0, %ymm10
+	vpmulld	%ymm10, %ymm9, %ymm9
+	vpshufd	$245, %ymm9, %ymm10     # ymm10 = ymm9[1,1,3,3,5,5,7,7]
+	vpmuludq	%ymm3, %ymm10, %ymm10
+	vpmuludq	%ymm2, %ymm9, %ymm11
+	vpshufd	$245, %ymm11, %ymm11    # ymm11 = ymm11[1,1,3,3,5,5,7,7]
+	vpblendd	$170, %ymm10, %ymm11, %ymm10 # ymm10 = ymm11[0],ymm10[1],ymm11[2],ymm10[3],ymm11[4],ymm10[5],ymm11[6],ymm10[7]
+	vpsrld	$6, %ymm10, %ymm10
+	vpmulld	%ymm4, %ymm10, %ymm10
+	vpsubd	%ymm10, %ymm9, %ymm9
+	vmovdqu	%ymm9, 65568(%rdi,%rax,4)
+	vpaddd	%ymm6, %ymm1, %ymm9
+	vpaddd	%ymm6, %ymm0, %ymm10
+	vpmulld	%ymm10, %ymm9, %ymm9
+	vpshufd	$245, %ymm9, %ymm10     # ymm10 = ymm9[1,1,3,3,5,5,7,7]
+	vpmuludq	%ymm3, %ymm10, %ymm10
+	vpmuludq	%ymm2, %ymm9, %ymm11
+	vpshufd	$245, %ymm11, %ymm11    # ymm11 = ymm11[1,1,3,3,5,5,7,7]
+	vpblendd	$170, %ymm10, %ymm11, %ymm10 # ymm10 = ymm11[0],ymm10[1],ymm11[2],ymm10[3],ymm11[4],ymm10[5],ymm11[6],ymm10[7]
+	vpsrld	$6, %ymm10, %ymm10
+	vpmulld	%ymm4, %ymm10, %ymm10
+	vpsubd	%ymm10, %ymm9, %ymm9
+	vmovdqu	%ymm9, 65600(%rdi,%rax,4)
+	vpaddd	%ymm7, %ymm1, %ymm9
+	vpaddd	%ymm7, %ymm0, %ymm10
+	vpmulld	%ymm10, %ymm9, %ymm9
+	vpshufd	$245, %ymm9, %ymm10     # ymm10 = ymm9[1,1,3,3,5,5,7,7]
+	vpmuludq	%ymm3, %ymm10, %ymm10
+	vpmuludq	%ymm2, %ymm9, %ymm11
+	vpshufd	$245, %ymm11, %ymm11    # ymm11 = ymm11[1,1,3,3,5,5,7,7]
+	vpblendd	$170, %ymm10, %ymm11, %ymm10 # ymm10 = ymm11[0],ymm10[1],ymm11[2],ymm10[3],ymm11[4],ymm10[5],ymm11[6],ymm10[7]
+	vpsrld	$6, %ymm10, %ymm10
+	vpmulld	%ymm4, %ymm10, %ymm10
+	vpsubd	%ymm10, %ymm9, %ymm9
+	vmovdqu	%ymm9, 65632(%rdi,%rax,4)
+	vpaddd	%ymm8, %ymm1, %ymm1
+	vpaddd	%ymm8, %ymm0, %ymm0
+	addq	$32, %rax
+	jne	.LBB6_1
+# %bb.2:
+	vzeroupper
+	retq
+.Lfunc_end6:
+	.size	assignArrayi32, .Lfunc_end6-assignArrayi32
+	.cfi_endproc
+                                        # -- End function
+	.globl	main                    # -- Begin function main
+	.p2align	4, 0x90
+	.type	main,@function
+main:                                   # @main
+	.cfi_startproc
+# %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	pushq	%r15
+	.cfi_def_cfa_offset 24
+	pushq	%r14
+	.cfi_def_cfa_offset 32
+	pushq	%r13
+	.cfi_def_cfa_offset 40
+	pushq	%r12
+	.cfi_def_cfa_offset 48
+	pushq	%rbx
+	.cfi_def_cfa_offset 56
+	pushq	%rax
+	.cfi_def_cfa_offset 64
+	.cfi_offset %rbx, -56
+	.cfi_offset %r12, -48
+	.cfi_offset %r13, -40
+	.cfi_offset %r14, -32
+	.cfi_offset %r15, -24
+	.cfi_offset %rbp, -16
+	vxorps	%xmm0, %xmm0, %xmm0
+	vmovups	%ymm0, mask+96(%rip)
+	vmovups	%ymm0, mask+72(%rip)
+	vmovups	%ymm0, mask+40(%rip)
+	vmovups	%ymm0, mask+8(%rip)
+	movq	$12, mask(%rip)
+	xorl	%r14d, %r14d
+	xorl	%edi, %edi
+	movl	$128, %esi
+	movl	$mask, %edx
+	vzeroupper
+	callq	sched_setaffinity
+	movl	$a+12, %r10d
+	xorl	%r11d, %r11d
+	xorl	%r8d, %r8d
+	xorl	%r9d, %r9d
+	.p2align	4, 0x90
+.LBB7_1:                                # =>This Loop Header: Depth=1
+                                        #     Child Loop BB7_2 Depth 2
+	movq	$-128, %rdi
+	xorl	%r13d, %r13d
+	movl	%r9d, %ebp
+	movl	%r14d, %esi
+	movl	%r8d, %eax
+	.p2align	4, 0x90
+.LBB7_2:                                #   Parent Loop BB7_1 Depth=1
+                                        # =>  This Inner Loop Header: Depth=2
+	movl	%eax, %ecx
+	imulq	$274877907, %rcx, %rcx  # imm = 0x10624DD3
+	shrq	$38, %rcx
+	imull	$1000, %ecx, %ecx       # imm = 0x3E8
+	movl	%eax, %r15d
+	subl	%ecx, %r15d
+	movl	%esi, %ecx
+	imulq	$274877907, %rcx, %rcx  # imm = 0x10624DD3
+	shrq	$38, %rcx
+	imull	$1000, %ecx, %ecx       # imm = 0x3E8
+	movl	%esi, %r12d
+	subl	%ecx, %r12d
+	movl	%ebp, %ecx
+	imulq	$274877907, %rcx, %rcx  # imm = 0x10624DD3
+	shrq	$38, %rcx
+	imull	$1000, %ecx, %ecx       # imm = 0x3E8
+	movl	%ebp, %edx
+	subl	%ecx, %edx
+	movl	%r13d, %ecx
+	imulq	$274877907, %rcx, %rcx  # imm = 0x10624DD3
+	shrq	$38, %rcx
+	imull	$1000, %ecx, %ecx       # imm = 0x3E8
+	movl	%r13d, %ebx
+	subl	%ecx, %ebx
+	movl	%ebx, 500(%r10,%rdi,4)
+	movl	%edx, 504(%r10,%rdi,4)
+	movl	%r12d, 508(%r10,%rdi,4)
+	movl	%r15d, 512(%r10,%rdi,4)
+	addl	%r11d, %eax
+	addl	%r11d, %esi
+	addl	%r11d, %ebp
+	addl	%r11d, %r13d
+	addq	$4, %rdi
+	jne	.LBB7_2
+# %bb.3:                                #   in Loop: Header=BB7_1 Depth=1
+	addq	$1, %r9
+	addl	$3, %r8d
+	addl	$4, %r11d
+	addq	$512, %r10              # imm = 0x200
+	addl	$2, %r14d
+	cmpq	$128, %r9
+	jne	.LBB7_1
+# %bb.4:
+	xorl	%r8d, %r8d
+	movl	$b+12, %r11d
+	xorl	%r14d, %r14d
+	xorl	%r9d, %r9d
+	xorl	%r10d, %r10d
+	.p2align	4, 0x90
+.LBB7_5:                                # =>This Loop Header: Depth=1
+                                        #     Child Loop BB7_6 Depth 2
+	movq	$-128, %rbx
+	xorl	%r13d, %r13d
+	movl	%r10d, %edx
+	movl	%r8d, %edi
+	movl	%r9d, %ecx
+	.p2align	4, 0x90
+.LBB7_6:                                #   Parent Loop BB7_5 Depth=1
+                                        # =>  This Inner Loop Header: Depth=2
+	movl	%ecx, %ebp
+	imulq	$274877907, %rbp, %rbp  # imm = 0x10624DD3
+	shrq	$38, %rbp
+	imull	$1000, %ebp, %ebp       # imm = 0x3E8
+	movl	%ecx, %r15d
+	subl	%ebp, %r15d
+	movl	%edi, %ebp
+	imulq	$274877907, %rbp, %rbp  # imm = 0x10624DD3
+	shrq	$38, %rbp
+	imull	$1000, %ebp, %ebp       # imm = 0x3E8
+	movl	%edi, %r12d
+	subl	%ebp, %r12d
+	movl	%edx, %ebp
+	imulq	$274877907, %rbp, %rbp  # imm = 0x10624DD3
+	shrq	$38, %rbp
+	imull	$1000, %ebp, %ebp       # imm = 0x3E8
+	movl	%edx, %esi
+	subl	%ebp, %esi
+	movl	%r13d, %ebp
+	imulq	$274877907, %rbp, %rbp  # imm = 0x10624DD3
+	shrq	$38, %rbp
+	imull	$1000, %ebp, %ebp       # imm = 0x3E8
+	movl	%r13d, %eax
+	subl	%ebp, %eax
+	movl	%eax, 500(%r11,%rbx,4)
+	movl	%esi, 504(%r11,%rbx,4)
+	movl	%r12d, 508(%r11,%rbx,4)
+	movl	%r15d, 512(%r11,%rbx,4)
+	addl	%r14d, %ecx
+	addl	%r14d, %edi
+	addl	%r14d, %edx
+	addl	%r14d, %r13d
+	addq	$4, %rbx
+	jne	.LBB7_6
+# %bb.7:                                #   in Loop: Header=BB7_5 Depth=1
+	addq	$1, %r10
+	addl	$3, %r9d
+	addl	$4, %r14d
+	addq	$512, %r11              # imm = 0x200
+	addl	$2, %r8d
+	cmpq	$128, %r10
+	jne	.LBB7_5
+# %bb.8:
+	movq	$.L.str.1, programName(%rip)
+	movq	$9999999, elapsed_rdtsc(%rip) # imm = 0x98967F
+	movabsq	$19999999999, %rax      # imm = 0x4A817C7FF
+	movq	%rax, overal_time(%rip)
+	movq	$0, ttime(%rip)
+	.p2align	4, 0x90
+.LBB7_9:                                # =>This Loop Header: Depth=1
+                                        #     Child Loop BB7_10 Depth 2
+                                        #       Child Loop BB7_11 Depth 3
+	#APP
+	#mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm1
+	#NO_APP
+	rdtsc
+	shlq	$32, %rdx
+	orq	%rax, %rdx
+	movq	%rdx, t1_rdtsc(%rip)
+	movl	$1536, %eax             # imm = 0x600
+	xorl	%ecx, %ecx
+	.p2align	4, 0x90
+.LBB7_10:                               #   Parent Loop BB7_9 Depth=1
+                                        # =>  This Loop Header: Depth=2
+                                        #       Child Loop BB7_11 Depth 3
+	movq	$-65536, %rdx           # imm = 0xFFFF0000
+	.p2align	4, 0x90
+.LBB7_11:                               #   Parent Loop BB7_9 Depth=1
+                                        #     Parent Loop BB7_10 Depth=2
+                                        # =>    This Inner Loop Header: Depth=3
+	movl	b+64000(%rax,%rdx), %esi
+	addl	a+64000(%rax,%rdx), %esi
+	movl	%esi, c_result+64000(%rax,%rdx)
+	movl	b+64512(%rax,%rdx), %esi
+	addl	a+64512(%rax,%rdx), %esi
+	movl	%esi, c_result+64512(%rax,%rdx)
+	movl	b+65024(%rax,%rdx), %esi
+	addl	a+65024(%rax,%rdx), %esi
+	movl	%esi, c_result+65024(%rax,%rdx)
+	movl	b+65536(%rax,%rdx), %esi
+	addl	a+65536(%rax,%rdx), %esi
+	movl	%esi, c_result+65536(%rax,%rdx)
+	addq	$2048, %rdx             # imm = 0x800
+	jne	.LBB7_11
+# %bb.12:                               #   in Loop: Header=BB7_10 Depth=2
+	addq	$1, %rcx
+	addq	$4, %rax
+	cmpq	$128, %rcx
+	jne	.LBB7_10
+# %bb.13:                               #   in Loop: Header=BB7_9 Depth=1
+	rdtsc
+	shlq	$32, %rdx
+	orq	%rax, %rdx
+	movq	%rdx, t2_rdtsc(%rip)
+	#APP
+	#mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm2
+	#NO_APP
+	movq	t2_rdtsc(%rip), %rax
+	subq	t1_rdtsc(%rip), %rax
+	movq	%rax, ttotal_rdtsc(%rip)
+	movq	ttbest_rdtsc(%rip), %rsi
+	cmpq	%rsi, %rax
+	jge	.LBB7_15
+# %bb.14:                               #   in Loop: Header=BB7_9 Depth=1
+	movq	%rax, ttbest_rdtsc(%rip)
+	movq	elapsed_rdtsc(%rip), %rdi
+	movl	$9999999, %ecx          # imm = 0x98967F
+	subq	%rdi, %rcx
+	movq	%rcx, elapsed(%rip)
+	movq	%rax, %rsi
+	jmp	.LBB7_16
+	.p2align	4, 0x90
+.LBB7_15:                               #   in Loop: Header=BB7_9 Depth=1
+	movq	elapsed_rdtsc(%rip), %rdi
+.LBB7_16:                               #   in Loop: Header=BB7_9 Depth=1
+	addq	ttime(%rip), %rax
+	movq	%rax, ttime(%rip)
+	leaq	-1(%rdi), %rcx
+	movq	%rcx, elapsed_rdtsc(%rip)
+	testq	%rdi, %rdi
+	je	.LBB7_18
+# %bb.17:                               #   in Loop: Header=BB7_9 Depth=1
+	cmpq	overal_time(%rip), %rax
+	jl	.LBB7_9
+.LBB7_18:
+	movq	elapsed(%rip), %rdx
+	movl	$10000000, %ecx         # imm = 0x989680
+	subq	%rdi, %rcx
+	movl	$.L.str.2, %edi
+	xorl	%eax, %eax
+	callq	printf
+	movl	$.L.str.3, %edi
+	movl	$.L.str.4, %esi
+	callq	fopen
+	movq	%rax, %rdi
+	movq	%rdi, fileForSpeedups(%rip)
+	movq	programName(%rip), %rdx
+	movq	ttbest_rdtsc(%rip), %r9
+	movl	$.L.str.5, %esi
+	movl	$128, %ecx
+	movl	$128, %r8d
+	xorl	%eax, %eax
+	callq	fprintf
+	xorl	%eax, %eax
+	addq	$8, %rsp
+	popq	%rbx
+	popq	%r12
+	popq	%r13
+	popq	%r14
+	popq	%r15
+	popq	%rbp
+	retq
+.Lfunc_end7:
+	.size	main, .Lfunc_end7-main
+	.cfi_endproc
+                                        # -- End function
+	.type	fileForSpeedups,@object # @fileForSpeedups
+	.bss
+	.globl	fileForSpeedups
+	.p2align	3
+fileForSpeedups:
+	.quad	0
+	.size	fileForSpeedups, 8
+
+	.type	.L.str,@object          # @.str
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.L.str:
+	.asciz	" "
+	.size	.L.str, 2
+
+	.type	programName,@object     # @programName
+	.data
+	.globl	programName
+	.p2align	3
+programName:
+	.quad	.L.str
+	.size	programName, 8
+
+	.type	ttbest_rdtsc,@object    # @ttbest_rdtsc
+	.globl	ttbest_rdtsc
+	.p2align	3
+ttbest_rdtsc:
+	.quad	99999999999999999       # 0x16345785d89ffff
+	.size	ttbest_rdtsc, 8
+
+	.type	elapsed_rdtsc,@object   # @elapsed_rdtsc
+	.globl	elapsed_rdtsc
+	.p2align	3
+elapsed_rdtsc:
+	.quad	9999999                 # 0x98967f
+	.size	elapsed_rdtsc, 8
+
+	.type	overal_time,@object     # @overal_time
+	.globl	overal_time
+	.p2align	3
+overal_time:
+	.quad	19999999999             # 0x4a817c7ff
+	.size	overal_time, 8
+
+	.type	ttime,@object           # @ttime
+	.bss
+	.globl	ttime
+	.p2align	3
+ttime:
+	.quad	0                       # 0x0
+	.size	ttime, 8
+
+	.type	mask,@object            # @mask
+	.comm	mask,128,8
+	.type	a,@object               # @a
+	.comm	a,65536,32
+	.type	b,@object               # @b
+	.comm	b,65536,32
+	.type	.L.str.1,@object        # @.str.1
+	.section	.rodata.str1.1,"aMS",@progbits,1
+.L.str.1:
+	.asciz	"ADD1F"
+	.size	.L.str.1, 6
+
+	.type	t1_rdtsc,@object        # @t1_rdtsc
+	.comm	t1_rdtsc,8,8
+	.type	c_result,@object        # @c_result
+	.comm	c_result,65536,32
+	.type	t2_rdtsc,@object        # @t2_rdtsc
+	.comm	t2_rdtsc,8,8
+	.type	ttotal_rdtsc,@object    # @ttotal_rdtsc
+	.comm	ttotal_rdtsc,8,8
+	.type	elapsed,@object         # @elapsed
+	.comm	elapsed,8,8
+	.type	.L.str.2,@object        # @.str.2
+.L.str.2:
+	.asciz	"\nthe best is %lld in %lldth iteration and %lld repetitions\n"
+	.size	.L.str.2, 60
+
+	.type	.L.str.3,@object        # @.str.3
+.L.str.3:
+	.asciz	"fileForSpeedups"
+	.size	.L.str.3, 16
+
+	.type	.L.str.4,@object        # @.str.4
+.L.str.4:
+	.asciz	"a"
+	.size	.L.str.4, 2
+
+	.type	.L.str.5,@object        # @.str.5
+.L.str.5:
+	.asciz	"%s, %dx%d, %lld\n"
+	.size	.L.str.5, 17
+
+	.type	mask1,@object           # @mask1
+	.comm	mask1,128,8
+	.type	temp2i16,@object        # @temp2i16
+	.comm	temp2i16,32,32
+	.type	c_tra,@object           # @c_tra
+	.comm	c_tra,65536,32
+
+	.ident	"clang version 6.0.0 (tags/RELEASE_600/final)"
+	.section	".note.GNU-stack","",@progbits
